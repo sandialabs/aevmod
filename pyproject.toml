@@ -1,0 +1,14 @@
+[build-system]
+requires = ["setuptools", "wheel", "pybind11"]
+build-backend = "setuptools.build_meta"
+
+[tool.pytest.ini_options]
+minversion = "6.0"
+addopts = "-ra"
+testpaths = [
+    "tests",
+]
+norecursedirs = [
+	".git", "tmp*", ".eggs", "bin", "include", "lib", "src",
+]
+

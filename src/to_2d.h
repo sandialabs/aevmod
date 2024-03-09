@@ -19,6 +19,7 @@ Sandia National Laboratories, Livermore, CA, USA
 
 #ifndef TO_2D_H
 #define TO_2D_H
+#include <stdexcept>
 
 //===============================================================================================
 // utility function to build a 2D vector-vector from a 1D vector of any type

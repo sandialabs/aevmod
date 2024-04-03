@@ -1,5 +1,5 @@
 /* =====================================================================================
-aevmod version 1.0
+aevmod version 1.1.0
 Copyright (2021) NTESS
 https://github.com/sandialabs/aevmod
 
@@ -192,7 +192,8 @@ std::vector<std::vector<std::vector<double>>> aev::eval(config& conf){
 					double Rij = l2_length(vij);      // ||x_j-x_i||
 					double Rik = l2_length(vik);      // ||x_k-x_i||
 					double vdv = std::inner_product(vij.begin(), vij.end(), vik.begin(), 0.0);
-					double theta = acos( std::max(-1.0, std::min( vdv/(Rij*Rik), 1.0)) );   // angle theta
+					//double theta = acos( std::max(-1.0, std::min( vdv/(Rij*Rik), 1.0)) );   // angle theta
+					double theta = acos( std::max(-1.0, std::min( beta * (vdv/(Rij*Rik)), 1.0)) );   // angle theta with beta scale, e.g. 0.95
 					for (int l=0; l<nsf; ++l){	// loop over angular SFs
 						int q = q_offset + kknsf + l;
 						std::vector<double> par = ang_par[l];
@@ -396,7 +397,8 @@ std::vector<std::vector<std::vector<std::vector<double>>>> aev::eval_Jac (config
 						double dfcconk  = -0.5*pioRc*sin(Rik*pioRc)*oRik;
 
 						double vdv   = std::inner_product(vij.begin(), vij.end(), vik.begin(), 0.0);
-						double theta = acos( std::max(-1.0, std::min( vdv/(Rij*Rik), 1.0)) );   // angle theta
+						//double theta = acos( std::max(-1.0, std::min( vdv/(Rij*Rik), 1.0)) );   // angle theta
+						double theta = acos( std::max(-1.0, std::min( (beta*vdv/(Rij*Rik)), 1.0)) );   // angle theta with beta scale, e.g. 0.95
 
 						double costh = cos(theta);
 						double ctden = Rij * Rik * sin(theta);
@@ -499,16 +501,22 @@ std::vector<std::vector<std::vector<std::vector<double>>>> aev::eval_Jac (config
 						    // s = 0,1,2 , 3,4,5 , ...     being composed of N triplets indexed by t=0,1,...,
 
 							std::vector<double> dthetadi(3);
-							for (int kc=0; kc<3; ++kc)
-								dthetadi[kc] = ( - dxxdi[kc] + costh * dRRdi[kc] ) / ctden;
+							for (int kc=0; kc<3; ++kc){
+								//dthetadi[kc] = ( - dxxdi[kc] + costh * dRRdi[kc] ) / ctden;
+							  dthetadi[kc] = beta * ( - dxxdi[kc] + costh * dRRdi[kc] ) / ctden;
+							}
 
 							std::vector<double> dthetadj(3);
-							for (int kc=0; kc<3; ++kc)
-								dthetadj[kc] = ( - dxxdj[kc] + costh * dRRdj[kc] ) / ctden;
+							for (int kc=0; kc<3; ++kc){
+								//dthetadj[kc] = ( - dxxdj[kc] + costh * dRRdj[kc] ) / ctden;
+								dthetadj[kc] = beta * ( - dxxdj[kc] + costh * dRRdj[kc] ) / ctden;
+							}
 
 							std::vector<double> dthetadk(3);
-							for (int kc=0; kc<3; ++kc)
-								dthetadk[kc] = ( - dxxdk[kc] + costh * dRRdk[kc] ) / ctden;
+							for (int kc=0; kc<3; ++kc){
+								//dthetadk[kc] = ( - dxxdk[kc] + costh * dRRdk[kc] ) / ctden;
+								dthetadk[kc] = beta * ( - dxxdk[kc] + costh * dRRdk[kc] ) / ctden;
+							}
 
 							// t = i
 							int s = i*3;

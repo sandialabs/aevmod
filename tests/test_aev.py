@@ -1,6 +1,6 @@
 """
 =====================================================================================
-aevmod version 1.0
+aevmod version 1.1.0
 Copyright (2021) NTESS
 https://github.com/sandialabs/aevmod
 

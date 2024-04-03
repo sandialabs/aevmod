@@ -1,5 +1,5 @@
 /* =====================================================================================
-aevmod version 1.0
+aevmod version 1.1.0
 Copyright (2021) NTESS
 https://github.com/sandialabs/aevmod
 
@@ -29,7 +29,7 @@ class aev {
 public:
 
   aev(const std::vector<std::string>& atom_types={"C","H"}, const int& nrho_rad=32, 
-      const int& nrho_ang=8, const int& nalpha=8, const std::vector<double>& R_c={4.6,3.1});
+      const int& nrho_ang=8, const int& nalpha=8, const std::vector<double>& R_c={4.6,3.1}, const double& beta=1.0);
 
   void build_index_sets(config& conf);
 
@@ -93,6 +93,7 @@ private:
   std::vector<std::string> rad_typ;
   std::vector<std::vector<std::string>> ang_typ;
   std::vector<std::string> tag;
+  double beta;
 
 //--------------------------------------------------------------------------------
 };

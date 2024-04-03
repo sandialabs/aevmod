@@ -1,5 +1,5 @@
 /* =====================================================================================
-aevmod version 1.0
+aevmod version 1.1.0
 Copyright (2021) NTESS
 https://github.com/sandialabs/aevmod
 
@@ -154,7 +154,8 @@ std::vector<ValueType> aev::evaluateFunction(const std::vector<ValueType> &xin, 
 					ValueType Rij = l2_length_sac(vij);      // ||x_j-x_i||
 					ValueType Rik = l2_length_sac(vik);      // ||x_k-x_i||
 					ValueType vdv = std::inner_product(vij.begin(), vij.end(), vik.begin(), static_cast<ValueType>(0.0));
-					ValueType theta = acos( std::max(-static_cast<ValueType>(1.0), std::min( vdv/(Rij*Rik), static_cast<ValueType>(1.0))) );   // angle theta
+					//ValueType theta = acos( std::max(-static_cast<ValueType>(1.0), std::min( vdv/(Rij*Rik), static_cast<ValueType>(1.0))) );   // angle theta
+          ValueType theta = acos( std::max(-static_cast<ValueType>(1.0), std::min( beta * (vdv/(Rij*Rik)), static_cast<ValueType>(1.0))) );   // angle theta with beta scale, e.g. 0.95
 					for (int l=0; l<nsf && Rij <= R_c[1] && Rik <= R_c[1]; ++l){	// loop over angular SFs if Rij and Rik both <= R_c[1]
 						int q = q_offset + kknsf + l;
 						std::vector<double> par = ang_par[l];

@@ -1,5 +1,5 @@
 /* =====================================================================================
-aevmod version 1.0
+aevmod version 1.1.0
 Copyright (2021) NTESS
 https://github.com/sandialabs/aevmod
 
@@ -45,10 +45,11 @@ void aev::get_aev_tags(int& rad_dout, int& ang_dout, std::vector<std::string>& a
 }
 //================================================================================
 aev::aev(const std::vector<std::string>& atom_types, const int& nrho_rad, 
-         const int& nrho_ang, const int& nalpha, const std::vector<double>& R_c_in) {
+         const int& nrho_ang, const int& nalpha, const std::vector<double>& R_c_in, const double& beta_in) {
 
 	types = atom_types;
 	R_c   = R_c_in;
+	beta  = beta_in;
 
 	// spec for radial SFs
 	double drho_rad  = R_c[0]/static_cast<double>(nrho_rad);

@@ -1,6 +1,6 @@
 """
 =====================================================================================
-aevmod version 1.0
+aevmod version 1.1.0
 Copyright (2021) NTESS
 https://github.com/sandialabs/aevmod
 
@@ -32,7 +32,8 @@ nrho_ang = 8   # number of angular aev radial shells
 nalpha   = 8   # number of angular aev angular sectors dividing [0,pi]
 R_c_rad  = 4.6 # radial aev cutoff radius (Angstroms)
 R_c_ang  = 3.1 # angular aev cutoff radius (Angstroms)
-myaev    = aevmod.aev(types, nrho_rad, nrho_ang, nalpha, [R_c_rad,R_c_ang])
+beta     = 0.95 # special AEV factor for near-linear molecules
+myaev    = aevmod.aev(types, nrho_rad, nrho_ang, nalpha, [R_c_rad,R_c_ang], beta)
 print("built aev object, AEV size:",myaev.dout)
 
 # define CH2 molecule symbol list

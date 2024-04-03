@@ -1,5 +1,5 @@
 /* =====================================================================================
-aevmod version 1.0
+aevmod version 1.1.0
 Copyright (2021) NTESS
 https://github.com/sandialabs/aevmod
 
@@ -45,13 +45,14 @@ PYBIND11_MODULE(aevmod, m) {
     m.doc() = "pybind11 aev module";
 
     py::class_<aev>(m,"aev")
-    .def(py::init<const std::vector<std::string>&, const int&, const int&, const int&, const std::vector<double>&>()
+    .def(py::init<const std::vector<std::string>&, const int&, const int&, const int&, const std::vector<double>&, const double&>()
         ,
         py::arg("atom_types")=std::vector<std::string>({"C","H"}),
         py::arg("nrho_rad")=32,
         py::arg("nrho_ang")=8,
         py::arg("nalpha")=8,
-        py::arg("R_c_in")=std::vector<double>({4.6,3.1})
+        py::arg("R_c_in")=std::vector<double>({4.6,3.1}),
+        py::arg("beta")=1.0 
         )
     .def_readwrite("dout", &aev::dout)
     .def_readwrite("n_rad", &aev::n_rad)

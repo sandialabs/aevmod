@@ -104,7 +104,7 @@ class PyTest(TestCommand):
 
 setup(
     name='aevmod',
-    version='1.0.0',
+    version='1.1.0',
     author='Habib Najm',
     author_email='hnnajm@sandia.gov',
     long_description=open('README.rst').read(),

@@ -503,19 +503,19 @@ std::vector<std::vector<std::vector<std::vector<double>>>> aev::eval_Jac (config
 							std::vector<double> dthetadi(3);
 							for (int kc=0; kc<3; ++kc){
 								//dthetadi[kc] = ( - dxxdi[kc] + costh * dRRdi[kc] ) / ctden;
-							  dthetadi[kc] = beta * ( - dxxdi[kc] + costh * dRRdi[kc] ) / ctden;
+							  dthetadi[kc] = ( - beta * dxxdi[kc] + costh * dRRdi[kc] ) / ctden;
 							}
 
 							std::vector<double> dthetadj(3);
 							for (int kc=0; kc<3; ++kc){
 								//dthetadj[kc] = ( - dxxdj[kc] + costh * dRRdj[kc] ) / ctden;
-								dthetadj[kc] = beta * ( - dxxdj[kc] + costh * dRRdj[kc] ) / ctden;
+								dthetadj[kc] = ( - beta * dxxdj[kc] + costh * dRRdj[kc] ) / ctden;
 							}
 
 							std::vector<double> dthetadk(3);
 							for (int kc=0; kc<3; ++kc){
 								//dthetadk[kc] = ( - dxxdk[kc] + costh * dRRdk[kc] ) / ctden;
-								dthetadk[kc] = beta * ( - dxxdk[kc] + costh * dRRdk[kc] ) / ctden;
+								dthetadk[kc] = ( - beta * dxxdk[kc] + costh * dRRdk[kc] ) / ctden;
 							}
 
 							// t = i
